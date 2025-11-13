@@ -1,9 +1,12 @@
 import Image from "next/image";
-
 import styles from "./styles/main.module.css";
 import Head from "next/head";
+import { getSortedPostData } from "@/lib/post";
+import Link from "next/link";
 
-export default function Home() {
+export default async function Home() {
+  const allPostsData = getSortedPostData();
+
   return (
     <>
       <div>
@@ -16,8 +19,16 @@ export default function Home() {
           <p>(This is a website)</p>
         </section>
         <section className={`${styles.headingMd} ${styles.padding1px}`}>
-          <h2>blog</h2>
-          <ul></ul>
+          <h2 className={styles.headingLg}>blog</h2>
+          <ul className={styles.list}>
+            {allPostsData.map(({ id, title, date }) => (
+              <li className={styles.listItem} key={id}>
+                <a>{title}</a>
+                <br />
+                <small className={styles.lightText}>{date}</small>
+              </li>
+            ))}
+          </ul>
         </section>
       </div>
     </>
