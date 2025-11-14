@@ -13,7 +13,6 @@ export default async function Home() {
         <Head>
           <title>Create</title>
         </Head>
-
         <section className={styles.headingMd}>
           <p>[Reactman704 Introduction]</p>
           <p>(This is a website)</p>
@@ -23,7 +22,7 @@ export default async function Home() {
           <ul className={styles.list}>
             {allPostsData.map(({ id, title, date }) => (
               <li className={styles.listItem} key={id}>
-                <a>{title}</a>
+                <Link href={`/posts/${id}`}>{title}</Link>
                 <br />
                 <small className={styles.lightText}>{date}</small>
               </li>
