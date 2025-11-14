@@ -1,35 +1,22 @@
-import Image from "next/image";
-import styles from "./styles/main.module.css";
-import Head from "next/head";
-import { getSortedPostData } from "@/lib/post";
+// app/page.tsx
 import Link from "next/link";
+import { getSortedPostData } from "@/lib/post";
 
-export default async function Home() {
-  const allPostsData = getSortedPostData();
+export default function Home() {
+  const posts = getSortedPostData();
 
   return (
-    <>
-      <div>
-        <Head>
-          <title>Create</title>
-        </Head>
-        <section className={styles.headingMd}>
-          <p>[Reactman704 Introduction]</p>
-          <p>(This is a website)</p>
-        </section>
-        <section className={`${styles.headingMd} ${styles.padding1px}`}>
-          <h2 className={styles.headingLg}>blog</h2>
-          <ul className={styles.list}>
-            {allPostsData.map(({ id, title, date }) => (
-              <li className={styles.listItem} key={id}>
-                <Link href={`/posts/${id}`}>{title}</Link>
-                <br />
-                <small className={styles.lightText}>{date}</small>
-              </li>
-            ))}
-          </ul>
-        </section>
-      </div>
-    </>
+    <div style={{ padding: 40 }}>
+      <h1>My Blog</h1>
+      <ul>
+        {posts.map(({ id, title, date }) => (
+          <li key={id} style={{ marginBottom: 15 }}>
+            <Link href={`/posts/${id}`}>{title}</Link>
+            <br />
+            <small>{date}</small>
+          </li>
+        ))}
+      </ul>
+    </div>
   );
 }
